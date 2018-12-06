@@ -1,25 +1,20 @@
 let messages = []
 
-let curId = 0;
+let id = 0;
 
 function findMessage(id){
   for(let i = 0; i<messages.length; i++){
     let thisId = messages[i].id
     if(id==thisId){return i}
   }
-    // if (id === messages[i].id)
-      
 }
 
 module.exports = {
   createMessage: (req, res, next) => {
     console.log('createMessage invoked. Creating message...')
-    let obby = {}
-    obby.id = curId
-    curId++
-    obby.text = req.body.text
-    obby.time = req.body.time
-    messages.push(obby)
+    let { text , time} = req.body
+    messages.push({ id , time , text})
+    id++
     res.status(200).send(messages)
   } ,
 
